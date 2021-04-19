@@ -8,13 +8,13 @@ from github import Github
 load_dotenv()
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 github = Github(os.getenv('GITHUB_TOKEN'))
-repository = github.get_user().get_repo('discordBot')
+repository = github.get_user().get_repo('discordBotPrinter')
 sleepTime = int(os.getenv('sleepTime'))
 
 while True:
     hostname = socket.gethostname()
     localIp = socket.gethostbyname(hostname)
-    contents = repository.get_contents("printerip.txt", ref="development")
-    repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha, branch='development')
+    contents = repository.get_contents("printerip.txt")
+    repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha)
     print(f"Updated printer ip to {localIp}")
     time.sleep(sleepTime)

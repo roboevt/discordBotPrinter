@@ -1,4 +1,5 @@
 import socket
+import string
 import time
 import os
 
@@ -13,7 +14,7 @@ sleepTime = int(os.getenv('sleepTime'))
 
 while True:
     stream = os.popen('hostname -I')
-    localIp = stream.readlines()
+    localIp = string.strip(stream.readlines())
     contents = repository.get_contents("printerip.txt")
     repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha)
     print(f"Updated printer ip to {localIp}")

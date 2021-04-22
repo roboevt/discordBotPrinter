@@ -21,5 +21,5 @@ while True:
         previousIp=localIp
         contents = repository.get_contents("printerip.txt")
         repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha)
-        print(f"Updated printer ip to {localIp}")
+        print(f"Octopi Python script updated printer ip to {localIp}")
     time.sleep(sleepTime)

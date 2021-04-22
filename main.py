@@ -12,10 +12,14 @@ github = Github(os.getenv('GITHUB_TOKEN'))
 repository = github.get_user().get_repo('discordBotPrinter')
 sleepTime = int(os.getenv('sleepTime'))
 
+previousIp = ' '
+
 while True:
     stream = os.popen('hostname -I')
     localIp = stream.readlines()[0].strip()
-    contents = repository.get_contents("printerip.txt")
-    repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha)
-    print(f"Updated printer ip to {localIp}")
+    if previousIp != localIp:
+        previousIp=localIp
+        contents = repository.get_contents("printerip.txt")
+        repository.update_file('printerip.txt', 'updated printer ip', str(localIp), contents.sha)
+        print(f"Updated printer ip to {localIp}")
     time.sleep(sleepTime)

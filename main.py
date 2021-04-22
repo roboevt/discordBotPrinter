@@ -1,5 +1,4 @@
-import socket
-import string
+
 import time
 import os
 
@@ -7,13 +6,11 @@ from dotenv import load_dotenv
 from github import Github
 
 load_dotenv()
-GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 github = Github(os.getenv('GITHUB_TOKEN'))
 repository = github.get_user().get_repo('discordBotPrinter')
 sleepTime = int(os.getenv('sleepTime'))
 
 previousIp = ' '
-
 while True:
     stream = os.popen('hostname -I')
     localIp = stream.readlines()[0].strip()

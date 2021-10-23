@@ -17,7 +17,7 @@ sleepTime = int(os.getenv('sleepTime'))
 
 while True:
     stream = os.popen('hostname -I')
-    localIp = stream.readlines()
+    localIp = stream.readlines()[0]
     localIp = localIp.replace('[', '')
     localIp = localIp.replace(']', '')
     localIp = localIp.replace('\n', '')

@@ -1,22 +1,22 @@
-
+import socket
 import time
 import os
 
 from dotenv import load_dotenv
-from github import Github
+from fastapi import FastAPI
+import requests
+
+app = FastAPI()
+#ec2Ip = "http://3.21.169.95"  # DBF ec2 ip, Put into .env
+ec2Ip = "http://3.144.155.72:8000/printerip/" # Personal ec2 ip for testing
+print(requests.get(ec2Ip))
 
 load_dotenv()
-github = Github(os.getenv('GITHUB_TOKEN'))
-repository = github.get_user().get_repo('discordBotPrinter')
+GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 sleepTime = int(os.getenv('sleepTime'))
 
-previousIp = ' '
 while True:
     stream = os.popen('hostname -I')
-    localIp = stream.readlines()[0].strip()
-    if previousIp != localIp:
-        previousIp = localIp
-        contents = repository.get_contents("printerip.txt")
-        repository.update_file('printerip.txt', 'Octopi Python script updated printer ip', localIp, contents.sha)
-        print(f"Updated printer ip to {localIp}")
+    localIp = stream.readlines()
+    requests.get(ec2Ip + str(localIp) + '?')
     time.sleep(sleepTime)

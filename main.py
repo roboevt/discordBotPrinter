@@ -8,8 +8,8 @@ import requests
 
 app = FastAPI()
 #ec2Ip = "http://3.21.169.95"  # DBF ec2 ip, Put into .env
-ec2Ip = "http://3.144.155.72:8000" # Personal ec2 ip for testing
-#ec2Ip = str(os.getenv('botIp'))
+ec2Ip = "http://3.144.155.72:8000/printerip/" # Personal ec2 ip for testing
+
 load_dotenv()
 GITHUB_TOKEN = os.getenv('GITHUB_TOKEN')
 sleepTime = int(os.getenv('sleepTime'))
@@ -21,5 +21,5 @@ while True:
     localIp = localIp.replace(']', '')
     localIp = localIp.replace('\n', '')
     localIp = localIp.replace(' ', '')
-    requests.get("http://" + ec2Ip + "/printerip/" + str(localIp) + '?')
+    requests.get(ec2Ip + str(localIp) + '?')
     time.sleep(sleepTime)

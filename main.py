@@ -19,5 +19,8 @@ while True:
     localIp = localIp.replace(']', '')
     localIp = localIp.replace('\n', '')
     localIp = localIp.replace(' ', '')
-    requests.get(f"{ec2Ip}{name},{model},{localIp}")
+    try:
+        requests.get(f"{ec2Ip}{name},{model},{localIp}")
+    except ConnectionRefusedError:  # Main discord bot program is not running
+        pass  # Nothing to do, just skip this iteration
     time.sleep(sleepTime)

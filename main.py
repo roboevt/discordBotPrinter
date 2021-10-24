@@ -19,5 +19,5 @@ while True:
     localIp = localIp.replace(']', '')
     localIp = localIp.replace('\n', '')
     localIp = localIp.replace(' ', '')
-    requests.get(ec2Ip + name + ',' + model + ',' + str(localIp))
+    requests.get(f"{ec2Ip}{name},{model},{localIp}")
     time.sleep(sleepTime)

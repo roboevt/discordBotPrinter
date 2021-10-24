@@ -5,7 +5,7 @@ import os
 from dotenv import load_dotenv
 from fastapi import FastAPI
 import requests
-
+load_dotenv()
 app = FastAPI()
 #ec2Ip = "http://3.21.169.95"  # DBF ec2 ip, Put into .env
 #ec2Ip = "http://3.144.155.72:8000/printerip/" # Personal ec2 ip for testing
